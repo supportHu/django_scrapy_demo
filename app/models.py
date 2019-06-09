@@ -24,3 +24,35 @@ class TuhuTireScrapy(models.Model):
     class Meta:
         app_label = 'app'
         db_table = 'tuhu_tire_db'
+
+
+class JingDongScrapy(models.Model):
+    brand = models.CharField(max_length=255)
+    property = models.CharField(max_length=255)
+    commit = models.CharField(max_length=255)
+    shop = models.CharField(max_length=255)
+    price = models.CharField(max_length=255)
+
+    class Meta:
+        app_label = 'app'
+        db_table = 'jd_db'
+
+
+class TmallScrapy(models.Model):
+    title = models.CharField(max_length=255)
+    shop = models.CharField(max_length=255)
+    price = models.CharField(max_length=255)
+    status = models.CharField(max_length=255)
+
+    class Meta:
+        app_label = 'app'
+        db_table = 'tm_db'
+
+
+class TuhuScrapy(models.Model):
+    displayName = models.CharField(max_length=255)
+    price = models.CharField(max_length=255)
+
+    class Meta:
+        app_label = 'app'
+        db_table = 'th_db'

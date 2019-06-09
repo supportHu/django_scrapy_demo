@@ -8,13 +8,27 @@
 from scrapy_djangoitem import DjangoItem
 from app.models import AppScrapy
 from app.models import TuhuTireScrapy
+from app.models import JingDongScrapy
+from app.models import TmallScrapy
+from app.models import TuhuScrapy
 
 
 class SpiderbotItem(DjangoItem):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
     django_model = AppScrapy
 
 
 class TuhuTireItem(DjangoItem):
     django_model = TuhuTireScrapy
+
+
+class JingDongItem(DjangoItem):
+    django_model = JingDongScrapy
+
+
+class TmallItem(DjangoItem):
+    django_model = TmallScrapy
+
+
+class TuhuItem(DjangoItem):
+    django_model = TuhuScrapy
+

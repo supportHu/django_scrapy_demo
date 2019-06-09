@@ -6,6 +6,22 @@
 # https://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
 from scrapy import signals
+from faker import Faker
+from selenium import webdriver
+from selenium.common.exceptions import TimeoutException
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.ui import WebDriverWait
+from scrapy.http import HtmlResponse
+import time
+
+
+class RandomUseragent(object):
+    def __init__(self):
+        self.fake = Faker()
+
+    def process_request(self, request, spider):
+        request.headers.setdefault('User-Agent', self.fake.user_agent())
 
 
 class SpiderbotSpiderMiddleware(object):
@@ -101,3 +117,46 @@ class SpiderbotDownloaderMiddleware(object):
 
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
+
+
+class JDDownloaderMiddleware(object):
+    def __init__(self):
+        # super.__init__()
+        self.timeout = 20
+        options = webdriver.ChromeOptions()
+        options.add_argument('lang=zh_CN.UTF-8')
+        prefs = {"profile.managed_default_content_settings.images": 2}
+        options.add_experimental_option("prefs", prefs)
+        options.add_argument('--headless')
+        self.browser = webdriver.Chrome(chrome_options=options)
+        self.wait = WebDriverWait(self.browser, self.timeout)
+
+    def __del__(self):
+        self.browser.close()
+
+    def process_request(self, request, spider):
+        page = request.meta.get('page', 1)
+        try:
+            self.browser.get(request.url)
+            self.browser.execute_script('window.scrollTo(0,document.body.scrollHeight)')
+            time.sleep(2)
+            if page > 1:
+                input = self.wait.until(
+                    EC.presence_of_element_located((By.XPATH, './/span[@class="p-skip"]/input')))
+                submit = self.wait.until(EC.element_to_be_clickable((By.XPATH, './/span[@class="p-skip"]/a')))
+                input.clear()
+                input.send_keys(page)
+                submit.click()
+                self.browser.execute_script('window.scrollTo(0,document.body.scrollHeight)')
+                time.sleep(2)
+            self.wait.until(
+                EC.text_to_be_present_in_element((By.XPATH, './/span[@class="p-num"]/a[@class="curr"]'), str(page)))
+            self.wait.until(EC.presence_of_element_located((By.XPATH, './/ul[@class="gl-warp clearfix"]/li')))
+            return HtmlResponse(url=request.url, body=self.browser.page_source, request=request, encoding='utf-8',
+                                status=200)
+        except TimeoutException:
+            return HtmlResponse(url=request.url, status=500, request=request)
+
+
+
+
