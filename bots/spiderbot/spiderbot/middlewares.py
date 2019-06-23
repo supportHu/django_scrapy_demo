@@ -122,7 +122,7 @@ class SpiderbotDownloaderMiddleware(object):
 class JDDownloaderMiddleware(object):
     def __init__(self):
         # super.__init__()
-        self.timeout = 20
+        self.timeout = 10
         options = webdriver.ChromeOptions()
         options.add_argument('lang=zh_CN.UTF-8')
         prefs = {"profile.managed_default_content_settings.images": 2}
@@ -135,27 +135,17 @@ class JDDownloaderMiddleware(object):
         self.browser.close()
 
     def process_request(self, request, spider):
-        page = request.meta.get('page', 1)
-        try:
-            self.browser.get(request.url)
-            self.browser.execute_script('window.scrollTo(0,document.body.scrollHeight)')
-            time.sleep(2)
-            if page > 1:
-                input = self.wait.until(
-                    EC.presence_of_element_located((By.XPATH, './/span[@class="p-skip"]/input')))
-                submit = self.wait.until(EC.element_to_be_clickable((By.XPATH, './/span[@class="p-skip"]/a')))
-                input.clear()
-                input.send_keys(page)
-                submit.click()
+        if spider.name == 'jingdong':
+            try:
+                self.browser.get(request.url)
                 self.browser.execute_script('window.scrollTo(0,document.body.scrollHeight)')
                 time.sleep(2)
-            self.wait.until(
-                EC.text_to_be_present_in_element((By.XPATH, './/span[@class="p-num"]/a[@class="curr"]'), str(page)))
-            self.wait.until(EC.presence_of_element_located((By.XPATH, './/ul[@class="gl-warp clearfix"]/li')))
-            return HtmlResponse(url=request.url, body=self.browser.page_source, request=request, encoding='utf-8',
-                                status=200)
-        except TimeoutException:
-            return HtmlResponse(url=request.url, status=500, request=request)
+                self.wait.until(EC.presence_of_element_located((By.XPATH, './/ul[@class="gl-warp clearfix"]/li')))
+                return HtmlResponse(url=request.url, body=self.browser.page_source, request=request, encoding='utf-8',
+                                    status=200)
+            except TimeoutException:
+                return HtmlResponse(url=request.url, status=500, request=request)
+        return None
 
 
 

@@ -58,15 +58,16 @@ ROBOTSTXT_OBEY = False
 SPIDER_MIDDLEWARES = {
    'scrapy.downloadermiddlewares.useragent.UserAgentMiddleware': None,
    'spiderbot.middlewares.RandomUseragent': 540,
-   'spiderbot.middlewares.JDDownloaderMiddleware': 543,
+   # 'spiderbot.middlewares.JDDownloaderMiddleware': 543,
    'spiderbot.middlewares.SpiderbotSpiderMiddleware': 546,
 }
 
 # Enable or disable downloader middlewares
 # See https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    'spiderbot.middlewares.SpiderbotDownloaderMiddleware': 543,
-#}
+DOWNLOADER_MIDDLEWARES = {
+   'spiderbot.middlewares.SpiderbotDownloaderMiddleware': 543,
+   'spiderbot.middlewares.JDDownloaderMiddleware': 546,
+}
 
 # Enable or disable extensions
 # See https://doc.scrapy.org/en/latest/topics/extensions.html

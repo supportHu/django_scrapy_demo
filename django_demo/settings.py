@@ -78,12 +78,20 @@ DATABASES = {
     'default': {
         # 'ENGINE': 'django.db.backends.sqlite3',
         # 'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        #
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'yd_db',
+        'NAME': 'spider_db',
         'USER': 'yangxu',
         'PASSWORD': '@Yangxu',
         'HOST': '47.102.240.100',
         'PORT': '3433',
+
+        # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        # 'NAME': 'postgres',
+        # 'USER': 'postgres',
+        # 'PASSWORD': 'postgres',
+        # 'HOST': '',
+        # 'PORT': '',
     }
 }
 

@@ -27,6 +27,8 @@ class TuhuTireScrapy(models.Model):
 
 
 class JingDongScrapy(models.Model):
+    keyword = models.CharField(max_length=255)
+    sku = models.CharField(max_length=255)
     brand = models.CharField(max_length=255)
     property = models.CharField(max_length=255)
     commit = models.CharField(max_length=255)

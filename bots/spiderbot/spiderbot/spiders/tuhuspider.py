@@ -21,13 +21,13 @@ class TuhuSpider(Spider):
     def parse(self, response):
         le = LinkExtractor(restrict_xpaths='//td[@class="td1"]/a')
         for link in le.extract_links(response):
-            yield scrapy.Request(link.url, callback=self.parse_item)
+            yield Request(link.url, callback=self.parse_item)
 
         le = LinkExtractor(restrict_xpaths='//div[@class="pager"]/a[@class="last-child"]')
         links = le.extract_links(response)
         if links:
             next_url = links[0].url
-            yield scrapy.Request(next_url, callback=self.parse)
+            yield Request(next_url, callback=self.parse)
 
     @staticmethod
     def parse_item(response):
