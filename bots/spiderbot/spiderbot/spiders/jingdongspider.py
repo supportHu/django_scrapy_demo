@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 from scrapy import Request, Spider
 from bots.spiderbot.spiderbot.items import JingDongItem
-
+import selenium
 
 class JingdongSpider(Spider):
     name = 'jingdong'
