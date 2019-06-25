@@ -97,3 +97,6 @@ table名称修改
 
 - HTML解析不稳定
 - URL暂时不支持外部输入
+
+#### cmd
+python ${PYTHON_SCRIPTS_PATH}/scrapyd-deploy target -p jingdong
