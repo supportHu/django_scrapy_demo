@@ -99,4 +99,19 @@ table名称修改
 - URL暂时不支持外部输入
 
 #### cmd
-python ${PYTHON_SCRIPTS_PATH}/scrapyd-deploy target -p jingdong
+* * *
+###### 启动scrapy服务
+scrapyd
+
+###### 部署爬虫
+python C:\Users\chezhudianping\Anaconda3\Scripts\scrapyd-deploy target -p spiderbot
+
+###### curl 运行爬虫
+curl http://localhost:6800/schedule.json -d project=spiderbot -d spider=jingdong
+
+###### make
+python manage.py makemigrations
+
+###### 数据结构变化(迁移)
+python manage.py migrate
+

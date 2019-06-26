@@ -9,17 +9,17 @@ class JingdongSpider(Spider):
     allowed_domains = ['jd.com']
 
     # 需要爬取的 类目
-    keyword_list = ['轮胎', '轮毂', '刹车鼓', '刹车片', '刹车盘', '雨刷', '机油', '火花塞', '电瓶', '玻璃水', '防冻液']
-    # keyword_list = ['轮胎']
+    #keyword_list = ['轮胎', '轮毂', '刹车鼓', '刹车片', '刹车盘', '雨刷', '机油', '火花塞', '电瓶', '玻璃水', '防冻液']
+    keyword_list = ['轮胎']
 
     # 商品列表页 的请求地址
     base_url = 'https://search.jd.com/Search?keyword=%s&enc=utf-8&qrst=1&rt=1&stop=1&vt=2&stock=1&page=%d&click=0'
 
     def start_requests(self):
         for keyword in self.keyword_list:
-            for page in range(1, 201, 2):
+            for page in range(1, 7, 2):
                 url = self.base_url % (keyword, page)
-                yield Request(url=url, callback=self.parse, meta={'keyword': keyword})
+                yield Request(url=url, callback=self.parse, meta={'keyword': keyword}, encoding='utf-8')
 
     def parse(self, response):
         keyword = response.meta['keyword']
@@ -37,5 +37,7 @@ class JingdongSpider(Spider):
             item['price'] = ''.join(product.xpath('.//div[@class="p-price"]/strong/*/text()').extract()).strip()
             item['shop'] = ''.join(product.xpath('.//div[@class="p-shop"]/span/a/text()').extract()).strip()
             yield item
-            # print(item)
+            print(item)
+            # for k, v in item:
+            #     print(k + v + "\n")
 
