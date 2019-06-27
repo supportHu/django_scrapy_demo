@@ -5,6 +5,7 @@ from django.db import models
 class AppScrapy(models.Model):
     text = models.CharField(max_length=255)
     author = models.CharField(max_length=255)
+    # href = models.CharField(max_length=255)
 
     class Meta:
         app_label = 'app'
@@ -20,6 +21,7 @@ class TuhuTireScrapy(models.Model):
     tire_pattern = models.CharField(max_length=255)
     price = models.CharField(max_length=255)
     evaluate_count = models.CharField(max_length=255)
+    # href = models.CharField(max_length=255)
 
     class Meta:
         app_label = 'app'
@@ -34,6 +36,8 @@ class JingDongScrapy(models.Model):
     commit = models.CharField(max_length=255)
     shop = models.CharField(max_length=255)
     price = models.CharField(max_length=255)
+    href = models.CharField(max_length=255)
+
 
     class Meta:
         app_label = 'app'
@@ -45,6 +49,7 @@ class TmallScrapy(models.Model):
     shop = models.CharField(max_length=255)
     price = models.CharField(max_length=255)
     status = models.CharField(max_length=255)
+    #href = models.CharField(max_length=255)
 
     class Meta:
         app_label = 'app'
@@ -54,6 +59,7 @@ class TmallScrapy(models.Model):
 class TuhuScrapy(models.Model):
     displayName = models.CharField(max_length=255)
     price = models.CharField(max_length=255)
+    #href = models.CharField(max_length=255)
 
     class Meta:
         app_label = 'app'
