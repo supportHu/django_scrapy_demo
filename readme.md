@@ -98,8 +98,9 @@ table名称修改
 - HTML解析不稳定
 - URL暂时不支持外部输入
 
-#### cmd
-* * *
+#### --------------------------cmd  项目运行
+cd bots\spiderbot
+
 ###### 启动scrapy服务
 scrapyd
 
@@ -109,9 +110,19 @@ python C:\Users\chezhudianping\Anaconda3\Scripts\scrapyd-deploy target -p spider
 ###### curl 运行爬虫
 curl http://localhost:6800/schedule.json -d project=spiderbot -d spider=jingdong
 
-###### make
-python manage.py makemigrations
+###### ---数据结构变化 make
+项目名  python manage.py makemigrations
 
 ###### 数据结构变化(迁移)
-python manage.py migrate
+项目名  python manage.py migrate
 
+###### ------------------------scrapy shell 调试
+ 1. cd bots\spiderbot
+ 2. scrapy shell <url> 要爬取数据页面的网址
+ 3. In [1]: response.xpath('.//ul[@class="gl-warp clearfix"]//div[@class="p-name p-name-type-2"]/a/@href').extract()
+    Out[1]: ````
+
+
+###### ------------------------Excel数据导出
+1. 打开一个Excel
+2. 菜单栏 --> 数据 --> 获取数据 --> (右击)传统向导 --> 从文本 --> 下一步....
