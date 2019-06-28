@@ -36,8 +36,7 @@ class JingDongScrapy(models.Model):
     commit = models.CharField(max_length=255)
     shop = models.CharField(max_length=255)
     price = models.CharField(max_length=255)
-    href = models.CharField(max_length=255)
-
+    href = models.CharField(max_length=255, default='')
 
     class Meta:
         app_label = 'app'

@@ -98,23 +98,25 @@ table名称修改
 - HTML解析不稳定
 - URL暂时不支持外部输入
 
-#### --------------------------cmd  项目运行
-cd bots\spiderbot
+##### -------------------------cmd  项目运行
+1. cd bots\spiderbot
 
-###### 启动scrapy服务
-scrapyd
+## 启动scrapy服务
+2. scrapyd
 
-###### 部署爬虫
-python C:\Users\chezhudianping\Anaconda3\Scripts\scrapyd-deploy target -p spiderbot
+## 部署爬虫
+3. cd bots\spiderbot --> python C:\Users\chezhudianping\Anaconda3\Scripts\scrapyd-deploy target -p spiderbot
 
-###### curl 运行爬虫
-curl http://localhost:6800/schedule.json -d project=spiderbot -d spider=jingdong
+## curl 运行爬虫
+4. curl http://localhost:6800/schedule.json -d project=spiderbot -d spider=jingdong
 
-###### ---数据结构变化 make
-项目名  python manage.py makemigrations
 
-###### 数据结构变化(迁移)
+
+###### ------------------------数据结构变化迁移  make    (# models --> default)
+项目名  python manage.py makemigrations    (# 1  -->  exit  -->  项目名python manage.py makemigrations )
 项目名  python manage.py migrate
+
+
 
 ###### ------------------------scrapy shell 调试
  1. cd bots\spiderbot
