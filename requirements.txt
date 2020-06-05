@@ -1,5 +1,5 @@
 selenium==3.141.0
-Django==2.2.1
+Django==2.2.13
 Scrapy==1.5.1
 scrapy-djangoitem==1.1.1
 scrapyd==1.2.0
