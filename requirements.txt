@@ -4,6 +4,6 @@ Scrapy==1.5.1
 scrapy-djangoitem==1.1.1
 scrapyd==1.2.0
 scrapyd-client==1.1.0
-Twisted==18.9.0
+Twisted==22.2.0
 faker==1.0.7
 psycopg2-binary==2.8.2
